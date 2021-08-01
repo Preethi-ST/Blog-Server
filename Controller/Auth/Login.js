@@ -35,9 +35,9 @@ exports.Login = async (req,res,next) => {
             res
             .cookie("token",token,{ 
                 expires: new Date(new Date().getTime() + 24 * 3600 * 1000),  
-                httpOnly : true,
+                httpOnly : true/* ,
                 secure : true,
-                sameSite : "none"  /********** Uncomment once backed completed *********/
+                sameSite : "none" */  /********** Uncomment once backed completed *********/
             })
             .status(200)
             .json({
