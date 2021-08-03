@@ -37,14 +37,13 @@ exports.Login = async (req,res,next) => {
                 expires: new Date(new Date().getTime() + 24 * 3600 * 1000),  
                 httpOnly : true,
                 secure : true,
-                sameSite : "none"  /********** Uncomment once backed completed *********/
+                sameSite : "none"  
             })
             .status(200)
             .json({
                 success : true,
                 message : "Login Success",
                 userdetails : others,
-                /*token  ************************************ Remove atlast ********************************/
             })
         }
     }
@@ -70,3 +69,18 @@ exports.isLoggedIn = async (req,res,next) => {
         return res.json({success : false})
     }
 }
+
+exports.Logout = async (req,res,next) => {
+    res
+      .cookie("token", "", {
+        httpOnly: true,
+        expires: new Date(0),
+        secure: true,
+        sameSite: "none",
+    })
+    .status(200)
+    .send({
+        success : true
+    });
+}
+    

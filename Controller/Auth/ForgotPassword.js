@@ -15,10 +15,12 @@ module.exports = ForgotPassword = async (req,res,next) => {
         const resetToken = await user.getResetPasswordToken();
         await user.save(); 
 
-        const resetURL = `https://localhost:3000/Blogzoid/reset-password/${resetToken}`
+        const resetURL = `${process.env.FE_URL}/Blogzoid/resetpassword/${resetToken}`
 
         const message = 
         `
+        <p>Hello ${user.username},</p>
+        
         <h1>You have requested to reset your password</h1>
 
         <p>Click on the below link to reset your password</p>
@@ -45,7 +47,7 @@ module.exports = ForgotPassword = async (req,res,next) => {
             return res.status(200).json({success:true,message : "Email Sent! Make sure to check your spam mail and mark not as spam."})
         }catch(error){
             console.log(error)
-            return res.status(500).json({success:false,message : "Email couldn't be sent"})
+            return res.status(500).json({success:false,error : "Email couldn't be sent"})
         }
 
     }catch(error){

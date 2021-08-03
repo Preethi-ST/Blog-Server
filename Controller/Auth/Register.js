@@ -20,7 +20,6 @@ exports.Register = async (req,res,next) => {
         return res.status(200).json({
             success : true,
             message : "Registered Successfully",
-            user /************************************* Remove atlast ********************************/
         })
     }catch(error){
         return res.status(500).send({
